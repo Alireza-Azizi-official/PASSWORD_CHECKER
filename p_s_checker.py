@@ -1,79 +1,72 @@
-import string 
-import getpass
-import time
+import string, getpass, time 
 
-def p_s_checker():
-    password = getpass.getpass("ENTER YOUR PASSWORD: ")
+def c_p_strenght():
+    password = getpass.getpass("ENTER YOUR PASSWORD : ")
     strenght = 0
-    remarks = ""
-    lower = upper = num = wspace = special = 0
+    remarks = ''
+    lower = upper = w_space = num = special = 0
     
     for i in list(password):
         if i in string.ascii_lowercase:
-            lower += 1 
+            lower += 1
         elif i in string.ascii_uppercase:
-            upper += 1
+            upper += 1 
+        elif i == " " : 
+            w_space +=1 
         elif i in string.digits:
             num += 1
-        elif i == " ":
-            wspace += 1
         else:
             special += 1
             
-    if lower >= 1 :
+    if lower >= 1:
+        strenght += 1 
+    elif upper >= 1 :
         strenght += 1
-    if upper >= 1 : 
+    elif num >= 1 : 
         strenght += 1
-    if num >= 1 :
-        strenght +=1 
-    if wspace >= 1:
-        strenght += 1
-    if special >= 1:
+    elif w_space >= 1 : 
+        strenght += 1 
+    elif special >= 1 :
         strenght +=1
     
-    if strenght == 1:
-        remarks = ("That's a terrible password even a dog can guess it! change it right now.")
-    elif strenght == 2:
-        remarks = ("That's a weak passsword you should consider using a tougher password.")
-    elif strenght == 3:
-        remarks ("your password is hard to guess,but it could be better.")
-    elif strenght == 4:
-        remarks = ("your password is hard enought")
-    elif strenght == 5:
-        remarks = ("it is a hell hard password which you can not guess it even.")
+    if strenght == 1 : 
+        remarks = ("THAT IS A VERY BACK PASSWORD. CHANGE IT AS SOON AS POSSIBLE.")
+    elif strenght == 2 :
+        remarks = ("THAT IS A WEAK PASSWORD. YOU SHOULD CONSIDER USING A TOUGHTER PASSWORD.")
+    elif strenght == 3 :
+        remarks = ("YOUR PASSWORD IS OK, BUT IT CAN BE IMPROVED.")
+    elif strenght == 4 :
+        remarks = ("YOUR PASSWORD IS HARD TO GUESS, BUT YOU COULD MAKE IT EVEN MORE SECURE.")
+    elif strenght == 5 : 
+        remarks = (" NOW THAT IS ONE HELL OF A STRONG PASSWORD>")
         
-    print("YOUR PASSWORD HAS:")
-    print(f"<<{lower}>> lowercase letters.")
-    print(f"<<{upper}>> lowercase letters.")
-    print(f"<<{num}>> lowercase letters.")
-    print(f"<<{wspace}>> lowercase letters.")
-    print(f"<<{special}>> lowercase letters.")
+    print("your password has : ")
+    print(f'{lower} lower case letters.')
+    print(f'{upper} upper case letters.')
+    print(f'{num} numbers.')
+    print(f'{w_space} white spaces.')
+    print(f'{special} special characters.')
+    print(f'passowrd score is :{strenght / 5}')
+    print(f"Remarks : {remarks}")
     
-    print(f"password score : {strenght / 5}")
-    print(f"Remarks: {remarks}")
-    
-def check_pass(another_pw = False):
+def check_pwd(another_pw = False):
     valid = False
-    
     if another_pw:
-        choice = input("Do you want to check another password? (y/n):")
-    else:
-        choice = input("Do you want to check your password? (y/n):")
-    while not valid :
-        if choice.lower() == "y":
+        choise = input("DO YOU WANT TO CHECK YOUR PASSWORDS STRENGHT (y/n):")
+        
+    while not valid:
+        if choise.lower() == "y":
             return True
-        if choice.lower() == "n":
-            print("exiting....\n")
-            time.sleep(2)
-            print("Take care.")
-            return False
-        else:
-            print("invalid input ..... please try again. \n")
-
+        elif choise.lower() == "n":
+            print("EXITING.....")
+            return False 
+        else: 
+            print("INVALID INPUT........ PLEASE TRY AGAIN. \n")
+            
 if __name__ == "__main__":
-    print("_________ PASSWORD STRENGHT CHECKER __________")
-    check_pwd = check_pass()
+    print("-_-_-_-_-_-_-_ WELCOM TO PASSWORD STRENGTH CHECKER -_-_-_-_-_-_-_")
+    check_pwd = check_pwd()
     while check_pwd:
-        p_s_checker()
-        check_pwd = check_pass(True)
+        c_p_strenght()
+        check_pwd = check_pwd(True)
     
